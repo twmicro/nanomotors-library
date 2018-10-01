@@ -4,12 +4,11 @@
 class NanoMotors
 {
     private:
-     int d1_pin_P;
-     int d2_pin_P;
-     int s1_pin_P;
-     int s2_pin_P;
-	 int speed1_P;
-	 int speed2_P;
+     int _dir1_pin;
+     int _dir2_pin;
+     int _speed1_pin;
+     int _speed2_pin;
+	 int _speed;
     public:
      NanoMotors(int d1_pin, int d2_pin, int s1_pin, int s2_pin);
      enum Direction
@@ -19,8 +18,8 @@ class NanoMotors
         Left = 2,
         Right = 3
      };
-     void Nm_setDirection(Direction motor1_d, Direction motor2_d);
-     void Nm_setSpeed(int motor1_s, int motor2_s);
+     void Nm_setDirection(Direction direction);
+     void Nm_setSpeed(int speed);
 };
 #endif
 

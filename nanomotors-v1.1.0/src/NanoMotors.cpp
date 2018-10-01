@@ -2,58 +2,47 @@
 #include "NanoMotors.h"
 NanoMotors::NanoMotors(int d1_pin, int d2_pin, int s1_pin, int s2_pin)
 {
-  d1_pin_P = d1_pin;
-  d2_pin_P = d2_pin;
-  s1_pin_P = s1_pin;
-  s2_pin_P = s2_pin;
+  _dir1_pin = d1_pin;
+  _dir2_pin = d2_pin;
+  __speed1_pin = s1_pin;
+  __speed2_pin = s2_pin;
 }
-void NanoMotors::Nm_setDirection(Direction motor1_d, Direction motor2_d)
+void NanoMotors::Nm_setDirection(Direction direction)
 {
-     if(motor1_d == Direction::Forward)
-     {
-          digitalWrite(d1_pin_P, HIGH);
-		  analogWrite(s1_pin_P, speed1_P);
-     }
-     else if(motor2_d == Direction::Forward)
-     {
-          digitalWrite(d2_pin_P, HIGH);
-          analogWrite(s2_pin_P, speed2_P);
-     }  
-     else if(motor2_d == Direction::Backward)
-     {
-          digitalWrite(d1_pin_P, LOW);
-		  analogWrite(s1_pin_P, speed1_P);
-     }  
-     else if(motor2_d == Direction::Backward)
-     {
-          digitalWrite(d2_pin_P, LOW);
-          analogWrite(s2_pin_P, speed2_P);
-     }  
-     else if(motor1_d== Direction::Left && motor2_d== Direction::Left)
-     {
-          digitalWrite(d2_pin_P, LOW);
-          digitalWrite(d1_pin_P, HIGH);
-		  analogWrite(s1_pin_P, 0);  
-		  analogWrite(s2_pin_P, speed2_P);
-     }
-     else if(motor1_d== Direction::Right && motor2_d== Direction::Right)  
-     {
-          digitalWrite(d2_pin_P, HIGH);
-          digitalWrite(d1_pin_P, LOW);
-	      analogWrite(s2_pin_P, 0);  
-		  analogWrite(s1_pin_P,  speed1_P);
-     }
-     else
-     {
-          
-     }
+   if(direction == Direction::Forward)
+   {
+      digitalWrite(_dir1_pin, HIGH);
+	    analogWrite(_speed1_pin, _speed);
+      digitalWrite(_dir2_pin, HIGH);
+      analogWrite(_speed2_pin, _speed);
+   }
+   else if(direction == Direction::Backward)
+   {
+      digitalWrite(_dir1_pin, LOW);
+	    analogWrite(_speed1_pin, _speed);
+      digitalWrite(_dir1_pin, LOW);
+      analogWrite(_speed1_pin, _speed);
+   }  
+   else if(direction== Direction::Left )
+   {
+      digitalWrite(_dir2_pin, LOW);
+      digitalWrite(_dir1_pin, HIGH);
+      analogWrite(_speed1_pin, 0);  
+      analogWrite(_speed2_pin, _speed);
+   }
+   else if(direction== Direction::Right)  
+   {
+      digitalWrite(_dir2_pin, HIGH);
+      digitalWrite(_dir1_pin, LOW);
+      analogWrite(_speed1_pin, 0);  
+      analogWrite(_speed2_pin,  _speed);
+   }
 }
 
-void NanoMotors::Nm_setSpeed(int motor1_s, int motor2_s)
+void NanoMotors::Nm_setSpeed(int speed)
 {
-        analogWrite(s1_pin_P, motor1_s);
-        analogWrite(s2_pin_P, motor2_s);
-		speed1_P = motor1_s;
-		speed2_P = motor2_s;
+    analogWrite(__speed1_pin, speed);
+    analogWrite(__speed2_pin, speed);
+		_speed = speed;
 }
 
